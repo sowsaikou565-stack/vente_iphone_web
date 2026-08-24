@@ -2,6 +2,8 @@ import crypto from 'crypto';
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import multer from 'multer';
+import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { pool } from './db.js';
@@ -16,6 +18,16 @@ const STORE_NAME = 'SLY MOBILE';
 const WHATSAPP_NUMBER = '22962329541';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '1234';
 const ADMIN_SECRET = process.env.ADMIN_SECRET || 'change-me-now';
+const uploadsDirectory = path.join(__dirname, 'uploads');
+fs.mkdirSync(uploadsDirectory, { recursive: true });
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: uploadsDirectory,
+    filename: (_req, file, callback) => callback(null, `${Date.now()}-${file.originalname.replace(/[^a-zA-Z0-9._-]/g, '-')}`),
+  }),
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: (_req, file, callback) => callback(null, /^image\/(jpeg|png|webp|gif)$/.test(file.mimetype)),
+});
 
 const DEFAULT_PRODUCTS = [
   {
@@ -300,6 +312,7 @@ function buildWhatsAppMessage({ items, totalAmount, customerName, customerPhone,
 
 app.use(cors());
 app.use(express.json({ limit: '1mb' }));
+app.use('/uploads', express.static(uploadsDirectory));
 app.get('/api/health', (_req, res) => {
   res.json({ ok: true, store: STORE_NAME });
 });
@@ -461,6 +474,11 @@ app.get('/api/admin/products', requireAdmin, async (_req, res, next) => {
   } catch (error) {
     next(error);
   }
+});
+
+app.post('/api/admin/upload', requireAdmin, upload.single('image'), (req, res) => {
+  if (!req.file) return res.status(400).json({ error: 'Veuillez sélectionner une image valide (5 Mo maximum)' });
+  res.status(201).json({ image_url: `/uploads/${req.file.filename}` });
 });
 
 app.post('/api/admin/products', requireAdmin, async (req, res, next) => {

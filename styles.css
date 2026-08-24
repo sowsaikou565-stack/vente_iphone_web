@@ -816,6 +816,7 @@ body:not(.admin-page).dark-theme .main-nav{color:#aabdc8}body:not(.admin-page).d
 @media (max-width: 800px) {.order-actions{grid-column:1/-1!important;justify-content:flex-start;margin-top:4px}.order-action{padding:7px 9px}}
 .checkbox-label{display:flex!important;align-items:center;gap:10px;font-weight:600!important}
 .checkbox-label input{width:17px!important;height:17px;margin:0!important;accent-color:var(--coral)}
+.upload-hint{margin:-7px 0 12px;color:var(--muted);font-size:10px}
 
 .main-nav {
   display: flex;

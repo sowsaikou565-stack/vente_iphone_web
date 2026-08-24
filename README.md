@@ -23,6 +23,7 @@ Les rubriques sont independantes :
 - Tableau de bord et statistiques
 - Commandes : validation, annulation et suppression
 - Produits : ajout, stock, prix et promotion
+- Produits : import de photos depuis l'ordinateur
 - Clients
 - Analytique
 - Notifications et parametres
@@ -70,6 +71,8 @@ git push
 
 Le repository GitHub sert a stocker le code. Pour mettre l'application en ligne, il faut ensuite deployer le serveur Node.js et connecter une base MySQL hebergee.
 
+Les photos importees par l'admin sont servies depuis `/uploads`. Sur Render, le disque local peut etre efface lors d'un redeploiement. Pour conserver durablement les photos en production, il faudra ensuite connecter un stockage cloud comme Cloudinary ou Amazon S3.
+
 ## Securite
 
 - Ne jamais envoyer `.env` sur GitHub.
@@ -85,6 +88,7 @@ Le repository GitHub sert a stocker le code. Pour mettre l'application en ligne,
 - `/api/orders` : création de commande
 - `/api/admin/login` : connexion admin
 - `/api/admin/products` : gestion des produits
+- `/api/admin/upload` : import d'une photo produit depuis l'ordinateur
 - `/api/admin/orders` : consultation des commandes
 - `/api/customer/register` : inscription client
 - `/api/customer/login` : connexion client
