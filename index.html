@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#102a43" />
+    <title>SLY MOBILE | iPhone & accessoires à Cotonou</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="SLY MOBILE accueil">
+        <span class="brand-mark">S</span>
+        <span>SLY <strong>MOBILE</strong></span>
+      </a>
+      <nav class="main-nav" aria-label="Navigation principale">
+        <a href="#catalogue">Boutique</a>
+        <a href="#promotions">Promotions</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Nous trouver</a>
+      </nav>
+      <button class="cart-button" id="open-cart" aria-label="Ouvrir le panier">
+        <span>Panier</span>
+        <b id="cart-count">0</b>
+      </button>
+    </header>
+
+    <main id="top">
+      <section class="hero section-wrap">
+        <div class="hero-copy">
+          <p class="eyebrow">Cotonou · Bénin <span></span> Disponible sur WhatsApp</p>
+          <h1>Le bon iPhone,<br /><em>au bon endroit.</em></h1>
+          <p class="hero-text">
+            iPhone et accessoires soigneusement sélectionnés, avec un accompagnement simple jusqu'à la remise en main propre.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-dark" href="#catalogue">Voir la boutique <span>↘</span></a>
+            <a class="text-link" href="#services">Comment ça marche ?</a>
+          </div>
+          <div class="trust-row">
+            <div><strong>100%</strong><span>Conseil local</span></div>
+            <div><strong>WhatsApp</strong><span>Commande directe</span></div>
+            <div><strong>Cotonou</strong><span>Retrait en boutique</span></div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="sun-disc"></div>
+          <div class="phone-art">
+            <div class="phone-camera"><i></i><i></i><i></i></div>
+            <div class="phone-shine"></div>
+          </div>
+          <div class="floating-note">
+            <span>✦</span>
+            <div><strong>Choisi pour vous</strong><small>Qualité & confiance</small></div>
+          </div>
+          <div class="hero-sticker">NEW<br /><b>ARRIVAGES</b></div>
+        </div>
+      </section>
+
+      <section class="category-strip">
+        <div class="section-wrap category-inner">
+          <p>Explorer par besoin</p>
+          <div class="category-links" id="category-links"></div>
+          <div class="scroll-hint">Glisser pour explorer <span>→</span></div>
+        </div>
+      </section>
+
+      <section class="catalogue section-wrap" id="catalogue">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">La sélection SLY</p>
+            <h2>Ce qui vous attend<br /><em>en boutique.</em></h2>
+          </div>
+          <div class="catalogue-tools">
+            <label class="search-box">
+              <span>⌕</span>
+              <input id="search" type="search" placeholder="Rechercher un produit" />
+            </label>
+            <select id="sort" aria-label="Trier les produits">
+              <option value="featured">Mis en avant</option>
+              <option value="price-low">Prix croissant</option>
+              <option value="price-high">Prix décroissant</option>
+            </select>
+          </div>
+        </div>
+        <div class="product-grid" id="product-grid"></div>
+      </section>
+
+      <section class="promotions section-wrap" id="promotions">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Promotions du moment</p>
+            <h2>Produits en <em>promo.</em></h2>
+          </div>
+          <p class="promo-note">Téléphones et accessoires sélectionnés à prix réduit.</p>
+        </div>
+        <div class="promo-grid" id="promo-grid"></div>
+      </section>
+
+      <section class="services" id="services">
+        <div class="section-wrap services-grid">
+          <div>
+            <p class="eyebrow">Simple comme bonjour</p>
+            <h2>Votre commande,<br /><em>à votre rythme.</em></h2>
+          </div>
+          <div class="service-list">
+            <article>
+              <b>01</b>
+              <div><h3>Choisissez</h3><p>Ajoutez votre iPhone ou vos accessoires au panier.</p></div>
+            </article>
+            <article>
+              <b>02</b>
+              <div><h3>Précisez</h3><p>Dites-nous si vous souhaitez une livraison ou un retrait en boutique.</p></div>
+            </article>
+            <article>
+              <b>03</b>
+              <div><h3>Échangez</h3><p>Votre demande arrive sur WhatsApp. Le tarif de livraison est confirmé selon votre zone.</p></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact section-wrap" id="contact">
+        <div>
+          <p class="eyebrow">Passez nous voir</p>
+          <h2>SLY MOBILE,<br /><em>à Cotonou.</em></h2>
+        </div>
+        <div class="contact-details">
+          <p>Une question sur un modèle, une couleur ou une disponibilité ? Nous répondons directement.</p>
+          <a class="whatsapp-link" href="https://wa.me/22962329541" target="_blank" rel="noreferrer">
+            Écrire sur WhatsApp <span>↗</span>
+          </a>
+          <p class="small-note">Boutique à Cotonou · Horaires communiqués sur WhatsApp</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="section-wrap footer-inner">
+        <span class="brand"><span class="brand-mark">S</span><span>SLY <strong>MOBILE</strong></span></span>
+        <span>iPhone · Accessoires · Cotonou</span>
+        <span>© 2026 SLY MOBILE</span>
+      </div>
+    </footer>
+
+    <aside class="cart-drawer" id="cart-drawer" aria-hidden="true">
+      <div class="drawer-backdrop" id="close-cart"></div>
+      <div class="drawer-panel">
+        <div class="drawer-head">
+          <div><p class="eyebrow">Votre sélection</p><h2>Panier <span id="drawer-count">0</span></h2></div>
+          <button class="icon-button" id="close-cart-button" aria-label="Fermer">×</button>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-empty" id="cart-empty">
+          <span>◌</span>
+          <p>Votre panier est encore vide.</p>
+          <a href="#catalogue" id="browse-products">Découvrir les produits</a>
+        </div>
+        <div class="cart-footer" id="cart-footer">
+          <div class="total-line"><span>Total estimé</span><strong id="cart-total">0 FCFA</strong></div>
+          <p>Le paiement et la livraison seront finalisés avec le propriétaire sur WhatsApp.</p>
+          <button class="button button-dark full" id="checkout" type="button">Commander sur WhatsApp <span>↗</span></button>
+        </div>
+      </div>
+    </aside>
+
+    <div class="modal" id="order-modal" aria-hidden="true">
+      <div class="modal-backdrop" id="close-modal"></div>
+      <div class="modal-card">
+        <button class="icon-button modal-close" id="close-modal-button" aria-label="Fermer">×</button>
+        <p class="eyebrow">Dernière étape</p>
+        <h2>Comment souhaitez-vous<br /><em>recevoir votre commande ?</em></h2>
+        <div class="delivery-toggle">
+          <button class="delivery-option selected" data-delivery="Livraison" type="button">Je me fais livrer</button>
+          <button class="delivery-option" data-delivery="Retrait" type="button">Je passe en boutique</button>
+        </div>
+        <form id="order-form">
+          <label>Votre nom<input required id="customer-name" placeholder="Ex. Grâce A." /></label>
+          <label>Numéro WhatsApp<input required id="customer-phone" type="tel" placeholder="Ex. 97 00 00 00" /></label>
+          <label id="address-field">Adresse de livraison<textarea id="customer-address" rows="3" placeholder="Quartier, rue, repère à Cotonou"></textarea></label>
+          <div class="delivery-info">
+            <span>ⓘ</span>
+            <p>Le prix de la livraison sera fixé selon votre zone et confirmé par le propriétaire sur WhatsApp.</p>
+          </div>
+          <button class="button button-green full" type="submit">Envoyer ma demande <span>↗</span></button>
+        </form>
+      </div>
+    </div>
+
+    <div class="toast" id="toast">Produit ajouté au panier</div>
+    <script type="module" src="/client.js"></script>
+  </body>
+</html>

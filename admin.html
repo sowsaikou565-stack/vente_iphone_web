@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#102a43" />
+    <title>SLY MOBILE Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="admin-page">
+    <section class="login-screen" id="auth-card">
+      <div class="auth-card">
+        <div class="auth-brand">
+          <span class="brand-mark">S</span>
+          <div>
+            <p>SLY MOBILE</p>
+            <span>Administration</span>
+          </div>
+        </div>
+        <p class="eyebrow">Accès administrateur</p>
+        <h1>Connexion<br /><em>tableau de bord</em></h1>
+        <p class="hero-text">
+          Connecte-toi pour gérer les produits, suivre les commandes et piloter la boutique depuis le backend MySQL.
+        </p>
+        <form id="login-form" class="auth-form">
+          <label>
+            Mot de passe admin
+            <input id="admin-password" type="password" required placeholder="Ton mot de passe admin" />
+          </label>
+          <button class="button button-dark full" type="submit">Se connecter <span>↗</span></button>
+        </form>
+        <p class="small-note">Le mot de passe est vérifié par le backend.</p>
+      </div>
+    </section>
+
+    <div class="admin-layout hidden" id="dashboard-panel">
+      <aside class="admin-sidebar">
+        <div class="sidebar-brand">
+          <span class="brand-mark">S</span>
+          <div>
+            <strong>SLY MOBILE</strong>
+            <span>Administration</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <p>Principal</p>
+          <a class="active" href="#dashboard" data-view="dashboard">Tableau de bord</a>
+          <a href="#orders" data-view="orders">Commandes</a>
+          <a href="#products" data-view="products">Produits</a>
+          <a href="#clients" data-view="clients">Clients</a>
+          <p class="sidebar-section">Analyse</p>
+          <a href="#analytics" data-view="analytics">Analytique</a>
+          <a href="#notifications" data-view="notifications">Notifications</a>
+          <p class="sidebar-section">Configuration</p>
+          <a href="#settings" data-view="settings">Paramètres</a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="sync-status">
+            <span class="status-dot"></span>
+            <span>Base MySQL connectée</span>
+          </div>
+          <button class="button button-outline full" id="logout-button" type="button">Déconnexion</button>
+        </div>
+      </aside>
+
+      <main class="admin-main" id="dashboard">
+        <header class="admin-topbar">
+          <div>
+            <h2>Tableau de bord</h2>
+          </div>
+          <div class="topbar-actions">
+            <button class="button button-outline" id="refresh-all" type="button">Synchroniser</button>
+            <button class="button button-dark" id="open-product-drawer" type="button">+ Nouveau produit</button>
+            <div class="avatar-badge">AD</div>
+          </div>
+          <p class="db-hint">Base de stockage : MySQL</p>
+        </header>
+
+        <section class="admin-view active-view" id="dashboard-view" data-view-panel="dashboard">
+        <section class="stats-grid">
+          <article class="stat-card">
+            <p>Revenus ce mois</p>
+            <strong id="revenue-stat">0 FCFA</strong>
+            <span id="revenue-sub">0 commandes au total</span>
+          </article>
+          <article class="stat-card">
+            <p>Commandes totales</p>
+            <strong id="orders-stat">0</strong>
+            <span id="orders-sub">0 en attente de traitement</span>
+          </article>
+          <article class="stat-card">
+            <p>Clients</p>
+            <strong id="clients-stat">0</strong>
+            <span>Enregistrés</span>
+          </article>
+          <article class="stat-card">
+            <p>Produits</p>
+            <strong id="products-stat">0</strong>
+            <span id="stock-warning">0 produits en stock bas</span>
+          </article>
+        </section>
+
+        <section class="dashboard-grid">
+          <article class="panel chart-panel">
+            <div class="panel-head">
+              <h3>Ventes - 7 derniers jours</h3>
+              <span>CA journalier</span>
+            </div>
+            <div class="chart" id="sales-chart" aria-label="Graphique des ventes"></div>
+          </article>
+
+          <article class="panel orders-panel" id="orders">
+            <div class="panel-head">
+              <h3>Dernières commandes</h3>
+              <span>En temps réel</span>
+            </div>
+            <div class="orders-list compact" id="dashboard-orders-list"></div>
+          </article>
+        </section>
+        </section>
+
+        <section class="admin-view" id="orders-view" data-view-panel="orders">
+          <div class="view-heading"><div><p class="eyebrow">Suivi commercial</p><h2>Toutes les <em>commandes.</em></h2></div><button class="button button-outline" id="refresh-orders" type="button">Actualiser</button></div>
+          <section class="panel orders-panel standalone-panel"><div class="panel-head"><h3>Commandes reçues</h3><span>En temps réel</span></div><div class="orders-list" id="orders-list"></div></section>
+        </section>
+
+        <section class="admin-view" id="products-view" data-view-panel="products">
+          <div class="view-heading"><div><p class="eyebrow">Catalogue</p><h2>Gérer les <em>produits.</em></h2></div><button class="button button-dark" id="open-product-drawer-view" type="button">+ Nouveau produit</button></div>
+        <section class="panel products-panel">
+          <div class="panel-head">
+            <h3>Produits populaires</h3>
+            <span>Stock en temps réel</span>
+          </div>
+          <div class="product-table" id="admin-list"></div>
+        </section>
+        </section>
+
+        <section class="admin-view" id="clients-view" data-view-panel="clients">
+          <div class="view-heading"><div><p class="eyebrow">Relation client</p><h2>Vos <em>clients.</em></h2></div></div>
+        <section class="panel clients-panel">
+          <div class="panel-head">
+            <h3>Clients</h3>
+            <span>Vue rapide</span>
+          </div>
+          <div class="clients-list" id="clients-list"></div>
+        </section>
+        </section>
+
+        <section class="admin-view" id="analytics-view" data-view-panel="analytics">
+          <div class="view-heading"><div><p class="eyebrow">Performance</p><h2>Votre <em>analytique.</em></h2></div></div>
+          <section class="panel chart-panel standalone-panel"><div class="panel-head"><h3>Ventes - 7 derniers jours</h3><span>CA journalier</span></div><div class="chart" id="sales-chart-detail"></div></section>
+        </section>
+
+        <section class="admin-view" id="notifications-view" data-view-panel="notifications">
+        <section class="panel footer-panel">
+          <div class="panel-head">
+            <h3>Notifications</h3>
+            <span id="settings">Paramètres synchronisés avec WhatsApp et MySQL</span>
+          </div>
+          <p class="footer-note">
+            Cette version reste simple, mais elle garde la logique du dashboard: produits, commandes, clients et statistiques.
+          </p>
+        </section>
+        </section>
+
+        <section class="admin-view" id="settings-view" data-view-panel="settings">
+          <div class="view-heading"><div><p class="eyebrow">Configuration</p><h2>Les <em>paramètres.</em></h2></div></div>
+          <section class="panel footer-panel"><div class="panel-head"><h3>Informations de la boutique</h3><span>SLY MOBILE · Cotonou</span></div><p class="footer-note">Les commandes sont reçues sur WhatsApp au +229 62 32 95 41. Le tarif de livraison est confirmé selon la zone du client.</p></section>
+        </section>
+      </main>
+    </div>
+
+    <aside class="drawer" id="product-drawer" aria-hidden="true">
+      <div class="drawer-backdrop" id="close-product-drawer"></div>
+      <div class="drawer-panel product-drawer-panel">
+        <div class="drawer-head">
+          <div>
+            <p class="eyebrow">Nouveau produit</p>
+            <h2>Ajouter un article</h2>
+          </div>
+          <button class="icon-button" id="close-product-drawer-button" aria-label="Fermer">×</button>
+        </div>
+        <form class="drawer-form" id="product-form">
+          <label>Nom du produit<input name="name" required placeholder="Ex. iPhone 15 Pro Max" /></label>
+          <label>Catégorie
+            <select name="category" required>
+              <option value="iPhone">iPhone</option>
+              <option value="Accessoires">Accessoires</option>
+            </select>
+          </label>
+          <label>Prix (FCFA)<input name="price" type="number" min="0" required placeholder="Ex. 675000" /></label>
+          <label>Stock<input name="stock" type="number" min="0" required placeholder="Ex. 12" /></label>
+          <label>Détail<input name="detail" required placeholder="Ex. 256 Go · Titane naturel" /></label>
+          <label>Image du produit<input name="image_url" required placeholder="https://..." /></label>
+          <label>Étiquette<input name="tag" placeholder="Ex. Nouveau" /></label>
+          <label class="checkbox-label"><input name="promotion" type="checkbox" value="true" /> Mettre ce produit en promotion</label>
+          <button class="button button-dark full" type="submit">Enregistrer <span>+</span></button>
+        </form>
+      </div>
+    </aside>
+
+    <div class="toast" id="toast">Connexion réussie</div>
+    <script type="module" src="/admin.js"></script>
+  </body>
+</html>
