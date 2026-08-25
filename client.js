@@ -1,6 +1,7 @@
 const STORE_NAME = 'SLY MOBILE';
 const WHATSAPP_NUMBER = '22962329541';
 const CART_KEY = 'sly-cart';
+const API_BASE_URL = 'https://sly-mobile-backend.onrender.com';
 
 let products = [];
 let cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
@@ -109,7 +110,7 @@ async function handleCustomerAuth(event) {
   const payload = register
     ? { name: document.querySelector('#auth-name').value, phone: document.querySelector('#auth-phone').value, email: document.querySelector('#auth-identifier').value, password: document.querySelector('#auth-password').value }
     : { identifier: document.querySelector('#auth-identifier').value, password: document.querySelector('#auth-password').value };
-  const response = await fetch(register ? '/api/customer/register' : '/api/customer/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+  const response = await fetch(`${API_BASE_URL}${register ? '/api/customer/register' : '/api/customer/login'}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
   const data = await response.json().catch(() => ({}));
   if (!response.ok) { error.textContent = data.error || 'Une erreur est survenue'; return; }
   localStorage.setItem(AUTH_TOKEN_KEY, data.token);
@@ -300,7 +301,7 @@ function renderCart() {
 }
 
 async function loadProducts() {
-  const response = await fetch('/api/products');
+  const response = await fetch(`${API_BASE_URL}/api/products`);
   if (!response.ok) {
     throw new Error('Impossible de charger les produits');
   }
@@ -329,7 +330,7 @@ async function submitOrder(event) {
     return;
   }
 
-  const response = await fetch('/api/orders', {
+  const response = await fetch(`${API_BASE_URL}/api/orders`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -386,7 +387,7 @@ document.querySelector('#order-form').addEventListener('submit', submitOrder);
 
 const customerToken = localStorage.getItem(AUTH_TOKEN_KEY);
 if (customerToken) {
-  fetch('/api/customer/me', { headers: { Authorization: `Bearer ${customerToken}` } }).then((response) => {
+  fetch(`${API_BASE_URL}/api/customer/me`, { headers: { Authorization: `Bearer ${customerToken}` } }).then((response) => {
     if (!response.ok) throw new Error('Session expirée');
     unlockCustomer();
     return loadProducts();
