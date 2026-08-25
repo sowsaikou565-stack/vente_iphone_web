@@ -973,6 +973,18 @@ h2 em {
   position: relative;
   background: #d9e6e8;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  padding: 14px;
+  box-sizing: border-box;
 }
 
 .sun-disc {
