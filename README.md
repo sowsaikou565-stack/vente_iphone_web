@@ -95,3 +95,7 @@ Les photos importees par l'admin sont servies depuis `/uploads`. Sur Render, le 
 - `/api/customer/me` : verification de session client
 - `/api/admin/orders/:id/status` : validation ou annulation d'une commande
 - `/api/admin/orders/:id` : suppression d'une commande
+
+- ## lien du site en question
+
+- https://sly-mobile-backend.onrender.com/
