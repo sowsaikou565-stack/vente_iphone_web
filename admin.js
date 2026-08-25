@@ -395,14 +395,31 @@ async function handleAddProduct(event) {
   event.preventDefault();
   const formData = new FormData(event.currentTarget);
   const image = formData.get('image');
-  const uploadData = new FormData();
-  uploadData.append('image', image);
-  const uploadResponse = await api('/api/admin/upload', { method: 'POST', body: uploadData });
-  if (!uploadResponse.ok) { const error = await uploadResponse.json().catch(() => ({})); showToast(error.error || 'Import de la photo impossible'); return; }
-  const { image_url } = await uploadResponse.json();
+  const imageUrlInput = (formData.get('image_url_input') || '').trim();
+  let finalImageUrl = '';
+
+  if (image && image.name && image.size > 0) {
+    const uploadData = new FormData();
+    uploadData.append('image', image);
+    const uploadResponse = await api('/api/admin/upload', { method: 'POST', body: uploadData });
+    if (!uploadResponse.ok) {
+      const error = await uploadResponse.json().catch(() => ({}));
+      showToast(error.error || 'Import de la photo impossible');
+      return;
+    }
+    const { image_url } = await uploadResponse.json();
+    finalImageUrl = image_url;
+  } else if (imageUrlInput) {
+    finalImageUrl = imageUrlInput;
+  } else {
+    showToast('Veuillez sélectionner un fichier ou indiquer une URL d’image');
+    return;
+  }
+
   const payload = Object.fromEntries(formData.entries());
   delete payload.image;
-  payload.image_url = image_url;
+  delete payload.image_url_input;
+  payload.image_url = finalImageUrl;
   const isPromotion = payload.promotion === 'true';
   delete payload.promotion;
   payload.tag = isPromotion ? `Promo${payload.tag ? ` · ${payload.tag}` : ''}` : (payload.tag || 'Disponible');
